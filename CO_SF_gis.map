@@ -1,0 +1,152 @@
+#This document is a UMN Mapserver Map configuration file.
+#It defines the data content and cartographic elements (scalebar, legend etc) of your web map.
+#A separate TEMPLATE document defines(via HTML) how the map elements are layed out in the browser.
+
+MAP
+
+#The name of this map.
+NAME CO_SUPERFUND_GIS
+
+#The default bounding coordinates of this map.
+# minX minY maxX maxY 
+EXTENT 134000.21 4089000 768121.72 4553000.12
+
+#The pixel size (width height) of the output images.
+SIZE 800 600
+
+#Paths to supporting configuration files.
+SHAPEPATH "/ms4w/apps/webmap/russenic/CO_SF_map/GISData"
+SYMBOLSET "/ms4w/apps/webmap/russenic/CO_SF_map/symbols/sym1.sym"
+#FONTSET   "/usr/local/apache/htdocs/umn_mapserver/fonts/fonts.list"
+
+
+#The WEB element sets the TEMPLATE file for this map 
+#  and sets the directory where created images are stored.
+WEB
+        TEMPLATE  CO_SF_gis.html
+        IMAGEPATH "C:\\ms4w\\tmp\\ms_tmp\\"
+        IMAGEURL  "/ms_tmp/"
+END
+
+#Set the output raster type (jpeg,png etc.)  
+#GIF is NOT supported because the GIF folks sue everyone who uses the gif format without paying them money.
+
+IMAGETYPE png
+
+PROJECTION
+	"init=epsg:26913"
+END
+
+#LEGEND defines a legend ...
+LEGEND
+  STATUS ON
+  KEYSIZE 60 30
+  KEYSPACING 10 10
+  #LABEL
+    #TYPE TRUETYPE
+    #FONT arial
+    #COLOR 0 0 0
+    #SIZE 9
+    #ANTIALIAS TRUE
+  #END
+END
+
+#SCALEBAR defines a scalebar ...
+SCALEBAR
+        IMAGECOLOR 255 0 0
+        LABEL COLOR 255 255 255
+        END
+        STYLE 1
+        SIZE 425 5
+        COLOR 255 255 255
+        OUTLINECOLOR 0 0 0
+        IMAGECOLOR 255 255 255
+        UNITS KILOMETERS
+	#UNITS MILES
+        INTERVALS 4
+        TRANSPARENT true
+        STATUS on
+        POSITION LC
+END
+
+###########  BEGIN MAP LAYERS ##########################
+
+#Each geospatial data source is defined by LAYER elements.
+#Layer sources may include ESRI Shapefiles, MapInfo TAB files, GeoTiff, GeoJpeg, and Spatial Database sources 
+#including PostGIS and Oracle Spatial.
+#This map includes one database layer.
+
+LAYER
+  	NAME "CO_counties"
+  	DATA COUNTIES
+  	STATUS default
+  	TYPE polygon
+  	#LABELITEM "quad_name"
+	CLASS
+  		LABEL
+    			#TYPE TRUETYPE
+    			#FONT arial
+    			#FONT LucidaBrightRegular
+    			#FONT LucidaBrightDemiItalic
+    
+    			COLOR 0 0 0
+    			#COLOR 255 0 0
+    			#PARTIALS true
+    			SIZE 10
+    			#ANTIALIAS TRUE
+    			#ANGLE auto
+		END
+
+    		NAME "Colorado Counties"
+    		COLOR 17 100 102
+    		#SIZE 1
+    		OUTLINECOLOR 255 255 255
+ 	END
+END
+
+#LAYER
+  	#CONNECTIONTYPE postgis
+  	#NAME "cities"
+  	#CONNECTION "user=postgres dbname=bouldergis"
+  	#DATA "the_geom from ctiestable"
+  	#STATUS default
+  	#TYPE polygon
+  	#CLASS
+    #		NAME "Boulder County Cities"
+    #		COLOR 0 0 255
+    #		#OUTLINECOLOR 255 255 0
+  #	END
+#END
+
+LAYER
+	NAME "Superfund Sites"
+  	DATA CO_superfund
+  	STATUS default
+  	TYPE polygon
+	CLASS
+    		NAME "Superfund Sites"
+    		COLOR 217 176 140
+    		#SIZE 1
+    		OUTLINECOLOR 148 86 0
+  	END
+END
+
+LAYER
+  	NAME "Landfills"
+  	DATA Landfills
+  	STATUS default
+  	TYPE point
+	CLASS
+    		SYMBOL "square"
+    		NAME "Solid Waste Facilities"
+    		COLOR 215 153 34
+    		SIZE 8
+    		OUTLINECOLOR 100 53 0
+  	END
+END
+
+#############  END MAP LAYERS #######################
+
+#THE END OF THE MAP FILE
+
+END

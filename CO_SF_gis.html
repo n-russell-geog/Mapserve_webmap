@@ -1,0 +1,114 @@
+<!-- MapServer Template -->
+
+<html>
+<head>
+  <title>Colorado Environmental Cleanup Sites</title>
+<style>
+body {
+ background-color: #2C3531;
+}
+
+#bounds {
+ width: 100%;
+ border: 3px solid white;
+ margin-top: 0px;
+}
+
+#contentContainer {
+ padding: 10px;
+}
+
+#header {
+ background-color: #116566;
+}
+
+#draw {
+ padding-top: 5px;
+}
+
+h2 {
+ font-family: helvetica;
+ font-size: 200%;
+ font-weight: bold;
+ color: white;
+ text-align: center;
+ margin: 0px;
+}
+
+h4 {
+ font-family: tahoma;
+ font-weight: bold;
+ font-size: 22px;
+ color: white;
+}
+
+p {
+ font-family: helvetica;
+ font-size: 18px;
+ color: white;
+}
+
+td {
+ vertical-align:bottom;
+}
+
+#maintext {
+ vertical-align:top;
+}
+
+#maintext_div {
+ padding: 5px;
+ border: 3px solid white;
+}
+
+</style>
+</head>
+
+<body>
+<div id="bounds">
+<div id="contentContainer">
+<div id="header">
+<h2>Colorado Environmental Cleanup Sites</h2>
+</div>
+<div id="draw">
+<table>
+ <tr>
+  <td> <h4>Click on the "Draw Your Map" button to create your map.</h4></td>
+  <td> 
+    <form method=GET action="/cgi-bin/mapserv.exe">
+     <input type="submit" value="Draw Your Map">
+     <input type="hidden" name="map" value= "C:\ms4w\apps\webmap\russenic\CO_SF_map\CO_SF_gis.map">
+     <input type="hidden" name="layers" value="all">
+    </form>
+  </td>
+ </tr>
+</table>
+</div>
+<table>
+ <tr>
+   <th rowspan="2"><img src="[img]" border="1"></th>
+   <td id="maintext">
+    <div id="maintext_div">
+       <p>This map shows the location of areas of potential environmental hazard in the forms of solid waste facilities and Superfund sites in Colorado. 
+Solid waste facilities can create serious local environmental impacts including infectious disease, water pollution, and soil contamination. 
+Along with these local environmental impacts, solid waste facilities can contribute to greenhouse gas (GHG) emissions through methane and nitrous oxide. 
+Methane and nitrous oxide are both powerful greenhouse gases with impacts up to 30 times and 200 times as much as carbon dioxide respectively.</p>
+       <p>Superfund sites are contaminated sites due to hazardous waste that are under perview of the EPA. Superfund gives the EPA the money and ability to clean up hazardous waste sites. These sites include processing plants, landfills, manufacturing facilities, and mining cites (EPA, n.d.). 
+Keeping track of potential sources of local and global environmental degradation is vital for envisioning a future where all have equal access to clean and healthy environments.</p>
+       
+     </div>
+   </td>
+ </tr>
+ <tr>
+   <td><img src="[legend]"></td>
+ </tr>
+ <tr>
+   <td> 
+     <img src="[scalebar]">
+   </td>
+ </tr>
+</table>
+</div>
+</div>
+</body>
+</html>
